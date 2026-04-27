@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c \":*)",
+      "Bash(python3 -c \":*)",
+      "Bash(python3 -m py_compile src/transformer_model.py)",
+      "Bash(python3 -m py_compile src/inference.py)",
+      "Bash(python3 -m py_compile run_pipeline.py)",
+      "Bash(python3 -m py_compile app/active_learning_app.py)",
+      "Bash(python3 -m py_compile src/utils.py)"
+    ]
+  }
+}
