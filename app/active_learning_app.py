@@ -233,13 +233,17 @@ def load_headlines() -> list:
         os.path.join(base, "..", "data", "qbias", "allsides_balanced_news_headlines-texts.csv"),
     ]
     for path in candidates:
-        if os.path.exists(path):
+        if not os.path.exists(path):
+            continue
+        try:
             df = pd.read_csv(path)
-            col = next((c for c in ("headline", "title", "heading") if c in df.columns), None)
-            if col:
-                headlines = df[col].dropna().unique().tolist()
-                random.shuffle(headlines)
-                return headlines
+        except Exception:
+            continue
+        col = next((c for c in ("headline", "title", "heading") if c in df.columns), None)
+        if col:
+            headlines = df[col].dropna().unique().tolist()
+            random.shuffle(headlines)
+            return headlines
     return []
 
 
