@@ -235,8 +235,9 @@ def load_headlines() -> list:
     for path in candidates:
         if os.path.exists(path):
             df = pd.read_csv(path)
-            if "headline" in df.columns:
-                headlines = df["headline"].dropna().unique().tolist()
+            col = next((c for c in ("headline", "title", "heading") if c in df.columns), None)
+            if col:
+                headlines = df[col].dropna().unique().tolist()
                 random.shuffle(headlines)
                 return headlines
     return []
