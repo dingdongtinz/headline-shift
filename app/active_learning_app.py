@@ -232,28 +232,19 @@ def load_headlines() -> list:
         os.path.join(base, "..", "data", "processed", "headlines_filtered.csv"),
         os.path.join(base, "..", "data", "qbias", "allsides_balanced_news_headlines-texts.csv"),
     ]
-    debug = []
     for path in candidates:
         abspath = os.path.abspath(path)
-        exists = os.path.exists(abspath)
-        size = os.path.getsize(abspath) if exists else 0
-        debug.append(f"{abspath} | exists={exists} | size={size}")
-        if not exists:
+        if not os.path.exists(abspath):
             continue
         try:
             df = pd.read_csv(abspath)
-        except Exception as e:
-            debug.append(f"  read error: {e}")
+        except Exception:
             continue
         col = next((c for c in ("headline", "title", "heading") if c in df.columns), None)
-        debug.append(f"  cols={list(df.columns[:5])} | matched_col={col} | rows={len(df)}")
         if col:
             headlines = df[col].dropna().unique().tolist()
             random.shuffle(headlines)
             return headlines
-    st.sidebar.markdown("**Debug — file paths:**")
-    for d in debug:
-        st.sidebar.code(d)
     return []
 
 
