@@ -2,7 +2,7 @@
 
 A crowdsourcing app for rating the emotional intensity of news headlines, built with Streamlit and Supabase.
 
-**Live app:** [headline-shift.streamlit.app](https://headline-shift.streamlit.app)
+**Live app:** [headline-shift.streamlit.app](https://headline-shift.streamlit.app/)
 
 ## What it does
 
